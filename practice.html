@@ -1,0 +1,126 @@
+                  <!-- First project-->
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Food To-Do List</title>
+
+	                    <!-- css -->
+						
+ <style>
+ body {
+    font-family: Arial, sans-serif;
+    background-color: #C75B7A;
+    margin: 0;
+    padding: 20px;
+
+}
+
+
+.container {
+
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    background: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #4cae4c;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+li button {
+    background: #d9534f;
+    color: white;
+}
+
+ </style>
+
+</head>
+<body background="C:\Users\PC\Documents\html\img\food app.jpg">
+
+    <div class="container">
+
+        <h1>Food To-Do List</h1>
+        <input type="text" id="foodInput" placeholder="Add a food item...">
+        <button id="addFoodBtn">Add Food</button>
+        <ul id="foodList"></ul>
+    </div>
+
+	      <!-- Javascript code-->
+
+    <script>
+	document.getElementById('addFoodBtn').addEventListener('click', addFood);
+
+function addFood() {
+    const foodInput = document.getElementById('foodInput');
+    const foodText = foodInput.value.trim();
+
+    if (foodText === '') return;
+
+    const foodList = document.getElementById('foodList');
+    const li = document.createElement('li');
+
+    li.innerHTML = `
+        <span>${foodText}</span>
+        <button onclick="editFood(this)">Edit</button>
+        <button onclick="removeFood(this)">Remove</button>
+    `;
+
+    foodList.appendChild(li);
+    foodInput.value = '';
+}
+
+function editFood(button) {
+    const foodText = button.parentElement.firstElementChild;
+    const newFoodText = prompt('Edit food item:', foodText.textContent);
+
+    if (newFoodText !== null && newFoodText.trim() !== '') {
+        foodText.textContent = newFoodText.trim();
+    }
+}
+
+function removeFood(button) {
+    const foodList = document.getElementById('foodList');
+    foodList.removeChild(button.parentElement);
+}
+
+	</script>
+</body>
+</html>
